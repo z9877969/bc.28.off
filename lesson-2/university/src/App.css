@@ -1,0 +1,8 @@
+@import "reset.css";
+
+.page {
+    display: grid;
+    grid-template-columns: 320px 1fr; 
+    /* calc(100vw - 320px) */
+    height: 100vh;
+}
