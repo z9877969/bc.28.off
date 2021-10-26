@@ -1,7 +1,13 @@
+import Menu from "../Menu";
+
 import "./Sidebar.css";
 
 const Sidebar = ()=> {
-    return <aside></aside>
+    return (
+    <aside className="sidebar">
+        <Menu />
+    </aside>
+    )
 }
 
 export default Sidebar;

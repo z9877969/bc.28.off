@@ -1,5 +1,9 @@
 @import "reset.css";
 
+body {
+    background-color: #DFDFDF;
+}
+
 .page {
     display: grid;
     grid-template-columns: 320px 1fr; 
