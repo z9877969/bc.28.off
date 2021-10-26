@@ -4,11 +4,33 @@ import { items } from "./items";
 
 const Main = ()=> {
 
-  const productElements = items.map(item => <ProductCard key={item.id} {...item} />);
+  const productElements = items.map(item => 
+    <ProductCard key={item.id} {...item} />); 
 
+    // ProductCard({key: item.id, title: item.title, description: item.description, price: item.price})
+    // const productElements = items.map(item => 
+    // ProductCard({key: item.id, title: item.title}));
+    // console.log(productElements);
+    /*
+    productElements = [
+          "<div className="product-card">
+            <img src="" alt="" />
+            <h4 className="product-card-title">iPhone X</h4>
+            <p className="product-card-description">лучший подарок на новый год</p>
+            <p className="product-card-price">630</p>
+        </div>",
+          "<div className="product-card">
+            <img src="" alt="" />
+            <h4 className="product-card-title">GeForce 3090</h4>
+            <p className="product-card-description">лучший подарок на новый год</p>
+            <p className="product-card-price">630</p>
+        </div>",
+    ]
+    */
     return (
       <main>
         {productElements}
+        {/* ProductCard() */}
             {/* {null}
             {undefined}
             {true}

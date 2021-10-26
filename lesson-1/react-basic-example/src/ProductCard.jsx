@@ -1,4 +1,4 @@
-const ProductCard = ({title, description, price, onDelete})=> {
+const ProductCard = ({title, description, price})=> {
 
     return (
         <div className="product-card">
@@ -6,7 +6,6 @@ const ProductCard = ({title, description, price, onDelete})=> {
             <h4 className="product-card-title">{`Название: ${title}`}</h4>
             <p className="product-card-description">{description}</p>
             <p className="product-card-price">{price / 27}</p>
-            <button onClick={onDelete}>Удалить</button>
         </div>
    )
 }
