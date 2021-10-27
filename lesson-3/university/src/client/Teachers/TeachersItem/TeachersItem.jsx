@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import "./TeachersItem.css";
 
 const TeachersItem = ({name, contacts, work}) => {
@@ -16,6 +18,11 @@ const TeachersItem = ({name, contacts, work}) => {
                 <li>
                     {contacts.address}
                 </li>
+                {contacts.linkedIn && (
+                    <li>
+                        {contacts.linkedIn}
+                    </li>
+                )}   
             </ul>
             <p className="teachers-item-column">
                 {work}
@@ -24,4 +31,15 @@ const TeachersItem = ({name, contacts, work}) => {
     )
 }
 
-export default TeachersItem
+export default TeachersItem;
+
+TeachersItem.propTypes = {
+    name: PropTypes.string.isRequired,
+    contacts: PropTypes.shape({
+        phone: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+        linkedIn: PropTypes.string
+    }).isRequired,
+    work: PropTypes.string.isRequired
+}

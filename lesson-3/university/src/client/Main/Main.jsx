@@ -1,15 +1,18 @@
 import Teachers from "../Teachers";
 
 import "./Main.css";
-
+import Section from "../../shared/components/Section";
 import teachers from "../../data/teachers.json";
 
 const Main = ()=>{
 
     return (
-    <main>
-        <Teachers items={teachers} />
-    </main>
+        <main>
+            <Section title="Преподаватели">
+                <Teachers items={teachers} title="Секция" />
+                {/* Teachers({items: teachers, title: "Секция"}) */}
+            </Section>
+        </main>
     )
 }
 
