@@ -1,0 +1,21 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+body {
+    background-color: #DFDFDF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: 320px 1fr; 
+    /* calc(100vw - 320px) */
+    height: 100vh;
+}
+
+.container {
+    max-width: 1086px;
+    padding: 0 15px;
+    width: 100%;
+    margin: 0 auto;
+}
