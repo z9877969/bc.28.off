@@ -1,0 +1,26 @@
+@import "src/shared/styles/base";
+
+.item {
+    margin-bottom: 26px;
+}
+
+.link {
+    color: $primary-color;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 24px;
+    letter-spacing: 1.25px;
+    position: relative;
+    padding-left: 45px;
+}
+
+.link.active {
+    color: $secondary-color;
+}
+
+.linkActive {
+    composes: link;
+    color: $secondary-color;
+}

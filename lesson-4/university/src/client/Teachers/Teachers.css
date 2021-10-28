@@ -1,0 +1,10 @@
+.teachers-item {
+    display: grid;
+    grid-template-columns: 172px 243px 1fr;
+    gap: 26px;
+
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #010101;
+}
