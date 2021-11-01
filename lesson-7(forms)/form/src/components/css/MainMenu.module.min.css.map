@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,AAAC,CACJ,UAAU,CAAE,IAAI,CAChB,OAAO,CAAE,IAAI,CACb,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,MAAM,CACf",
+    "sources": [
+        "../MainMenu/MainMenu.module.scss"
+    ],
+    "names": [],
+    "file": "MainMenu.module.min.css"
+}
