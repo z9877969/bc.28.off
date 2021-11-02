@@ -3,35 +3,30 @@ import { Component, Fragment } from "react";
 import styles from "./ToDoList.module.scss";
 
 import { toDoListItems } from "../../data";
-import ToDoItem from "./ToDoItem";
+import ToDoItem from "./ToDoItem/ToDoItem";
 
-class ToDoList extends Component {
-  state = {
-    items: toDoListItems,
-  };
+const ToDoList = ({ items, removeToDo }) => {
+  // const handleItemRemove = (id) =>
+  //   this.setState((prevState) => {
+  //     return { items: prevState.items.filter((item) => item.id !== id) };
+  //   });
 
-  handleItemRemove = (id) =>
-    this.setState((prevState) => {
-      return { items: prevState.items.filter((item) => item.id !== id) };
-    });
-
-  render() {
-    const { items } = this.state;
-    return (
-      <>
-        <ol>
-          {items.map((item) => (
-            <ToDoItem
-              key={item.id}
-              cbRemoveItem={this.handleItemRemove}
-              item={item}
-              styles={styles}
-            />
-          ))}
-        </ol>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <ol>
+        {items.map(({ title, descr, id, date }) => (
+          <ToDoItem
+            key={id}
+            id={id}
+            cbRemoveItem={removeToDo}
+            title={title}
+            descr={descr}
+            date={date}
+          />
+        ))}
+      </ol>
+    </>
+  );
+};
 
 export default ToDoList;

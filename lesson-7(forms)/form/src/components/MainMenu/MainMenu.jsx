@@ -7,7 +7,7 @@ import styles from "./MainMenu.module.scss";
 class MainMenu extends Component {
   state = {
     prop: "654654",
-    isShowList: false,
+    isShowList: true,
   };  
 
   render() {

@@ -5,13 +5,20 @@
   padding: 15px;
 
   & > .label {
-      margin-bottom: 10px;
+    margin-bottom: 10px;
   }
 }
 
-.statusWrapper {
+.labelWrapper {
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: -10px; 
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
 }
 
 .label {
@@ -19,13 +26,19 @@
   flex-direction: column;
 }
 
-.radio {
+.radio,
+.checkbox {
   align-items: center;
+  margin-bottom: 10px;
   &:not(:last-child) {
     margin-right: 15px;
   }
 }
 
+.checkbox {
+  width: 45%;
+
+}
 
 // toDoList
 .toDoList {
@@ -35,7 +48,6 @@
   justify-content: space-around;
   margin-bottom: -10px;
 }
-
 
 // toDoItem
 .toDoItem {

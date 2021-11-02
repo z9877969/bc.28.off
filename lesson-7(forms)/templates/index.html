@@ -35,14 +35,58 @@
           <span> Description </span>
           <input class="input" type="text" name="descr" />
         </label>
-        <div class="statusWrapper">
+        <div class="labelWrapper">
+          <label class="label checkbox">
+            <span> quickly/important </span>
+            <input
+              class="input"
+              type="checkbox"
+              name="importance status"
+              checked
+              value="quickly/important"
+            />
+          </label>
+          <label class="label checkbox">
+            <span> quickly/NOTimportant </span>
+            <input
+              class="input"
+              type="checkbox"
+              name="importance status"
+              value="quickly/NOTimportant"
+            />
+          </label>
+          <label class="label checkbox">
+            <span> NOTquickly/important </span>
+            <input
+              class="input"
+              type="checkbox"
+              name="importance status"
+              value="NOTquickly/important"
+            />
+          </label>
+          <label class="label checkbox">
+            <span> NOTquickly/NOTimportant </span>
+            <input
+              class="input"
+              type="checkbox"
+              name="importance status"
+              value="NOTquickly/NOTimportant"
+            />
+          </label>
+        </div>
+        <div class="labelWrapper">
           <label class="label radio">
             <span> Status close </span>
-            <input class="input" type="radio" name="status" value="close" />
+            <input
+              class="input"
+              type="radio"
+              name="work-status"
+              value="close"
+            />
           </label>
           <label class="label radio">
             <span> Status open </span>
-            <input class="input" type="radio" name="status" value="open" />
+            <input class="input" type="radio" name="work-status" value="open" />
           </label>
         </div>
       </form>
