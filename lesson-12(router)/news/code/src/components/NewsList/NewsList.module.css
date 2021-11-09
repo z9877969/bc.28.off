@@ -1,0 +1,35 @@
+.news {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 900px;
+    margin: 0 auto;
+  }
+  
+  .item {
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    color: antiquewhite;
+    margin-bottom: 20px;
+  }
+  
+  .img {
+    height: 200px;
+  }
+  
+  .textWrapper {
+    padding: 10px;
+    background-color: rgb(5, 3, 3);
+  }
+  
+  .title,
+  .author,
+  .date {
+    margin-bottom: 10px;
+  }
+  
+  .descr {
+    overflow: hidden;
+    height: 50px;
+  }
