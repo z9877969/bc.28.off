@@ -1,0 +1,9 @@
+1.redux-devtools
+2.https://2.bp.blogspot.com/-yj3h5POKq3c/XCCGUoQ0RLI/AAAAAAAAQ88/_5VpIs-O97IT0wKDySPbToD2xOfRO9C2gCLcBGAs/s1600/Bildschirmfoto-2017-12-01-um-08.53.32.png
+3.разделение логики, структуры
+4.with redux !== without useState
+5.принцип работы - https://coderlessons.com/wp-content/uploads/2019/07/data_handling_logic-1.jpg
+6.reducers
+7.actions
+8.compose
+9.constants
