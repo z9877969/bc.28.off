@@ -1,0 +1,14 @@
+{
+    transactions: {
+        incomes: [],
+        costs: []
+    },
+    categories: {
+        incomes: [],
+        costs: []
+    },
+    transaction: null,
+    isLoading: false,
+    error: null
+
+}
