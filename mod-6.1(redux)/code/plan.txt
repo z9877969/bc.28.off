@@ -3,7 +3,7 @@
 3.разделение логики, структуры
 4.with redux !== without useState
 5.принцип работы - https://coderlessons.com/wp-content/uploads/2019/07/data_handling_logic-1.jpg
-6.reducers
+6.reducers(counter/step)
 7.actions
 8.compose
 9.constants

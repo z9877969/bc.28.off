@@ -24,7 +24,7 @@ const ToDoPage = () => {
   };
 
   const items = useMemo(() => {
-    return filterToDoList();
+          return filterToDoList();
   }, [todo, filter]);
 
   useEffect(() => {
