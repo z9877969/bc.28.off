@@ -1,3 +1,0 @@
-1.devTools: process.env.NODE_ENV !== "production"
-2.actions с событиями 3 варианта
-3.slice
