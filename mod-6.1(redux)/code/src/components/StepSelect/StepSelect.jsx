@@ -1,23 +1,21 @@
 import { connect } from "react-redux";
-import { changeStepIncr, changeStepDecr } from "../../redux/step/stepActions";
+import { changeStepDecr, changeStepIncr } from "../../redux/step/stepAction";
 
-const StepSelect = ({
-  title,
-  stepIncr,
-  stepDecr,
-  changeStepIncr,
-  changeStepDecr,
-}) => {
+const StepSelect = ({ title, incr, decr, changeIncr, changeDecr }) => {
+  // const [stateIncr, setStateIncr] = useState(5)
+  // const [stateDecr, setStateDecr] = useState(10)
   return (
     <>
       <h1>{title}</h1>
       <label>
-        Decrement
+        <p>Increment</p>
         <select
-          onChange={(e) => changeStepDecr(Number(e.target.value))}
+          onChange={(e) => changeIncr(+e.target.value)}
           //   name="stepDecr"
-          value={stepDecr}
+          value={incr}
+          // value={stateIncr}
         >
+          <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
           <option value="50">50</option>
@@ -25,12 +23,13 @@ const StepSelect = ({
         </select>
       </label>
       <label>
-        Increment
+        <p>Decrement</p>
         <select
-          onChange={(e) => changeStepIncr(Number(e.target.value))}
-          //   name="stepIncr"
-          value={stepIncr}
+          onChange={(e) => changeDecr(+e.target.value)}
+          //   name="stepDecr"
+          value={decr}
         >
+          <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
           <option value="50">50</option>
@@ -42,15 +41,13 @@ const StepSelect = ({
 };
 
 const mapStateToProps = (state) => ({
-  stepIncr: state.step.incr,
-  stepDecr: state.step.decr,
+  incr: state.step.incr,
+  decr: state.step.decr,
 });
-// {stepIncr, stepDecr}
 
 const mapDispatchToProps = {
-  changeStepIncr,
-  changeStepDecr,
+  changeIncr: changeStepIncr,
+  changeDecr: changeStepDecr,
 };
-// {changeStepIncr, changeStepDecr}
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepSelect);
