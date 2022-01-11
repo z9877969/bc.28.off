@@ -56,9 +56,9 @@ const Counter = () => {
 // });
 
 // const mapDispatchToProps = (dispatch) => ({
-  // increment: (step) => dispatch(increment(step)),
-  // decrement: (step) => dispatch(decrement(step)),
-  // reset: () => dispatch(reset()),
+// increment: (step) => dispatch(increment(step)),
+// decrement: (step) => dispatch(decrement(step)),
+// reset: () => dispatch(reset()),
 // });
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Counter);

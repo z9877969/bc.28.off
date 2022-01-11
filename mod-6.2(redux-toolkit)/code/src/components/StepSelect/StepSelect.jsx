@@ -1,20 +1,14 @@
 import { connect } from "react-redux";
-import { changeStepDecr, changeStepIncr } from "../../redux/step/stepAction";
+// import { changeStepDecr, changeStepIncr } from "../../redux/step/stepAction"; // actions created with createActions
+import { changeDecr, changeIncr } from "../../redux/step/stepSlice"; // actions created with createSlice
 
 const StepSelect = ({ title, incr, decr, changeIncr, changeDecr }) => {
-  // const [stateIncr, setStateIncr] = useState(5)
-  // const [stateDecr, setStateDecr] = useState(10)
   return (
     <>
       <h1>{title}</h1>
       <label>
         <p>Increment</p>
-        <select
-          onChange={(e) => changeIncr(+e.target.value)}
-          //   name="stepDecr"
-          value={incr}
-          // value={stateIncr}
-        >
+        <select onChange={(e) => changeIncr(+e.target.value)} value={incr}>
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
@@ -24,11 +18,7 @@ const StepSelect = ({ title, incr, decr, changeIncr, changeDecr }) => {
       </label>
       <label>
         <p>Decrement</p>
-        <select
-          onChange={(e) => changeDecr(+e.target.value)}
-          //   name="stepDecr"
-          value={decr}
-        >
+        <select onChange={(e) => changeDecr(+e.target.value)} value={decr}>
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
@@ -46,8 +36,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  changeIncr: changeStepIncr,
-  changeDecr: changeStepDecr,
+  changeIncr,
+  changeDecr,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepSelect);

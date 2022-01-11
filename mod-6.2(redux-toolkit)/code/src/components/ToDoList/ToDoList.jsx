@@ -1,28 +1,30 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { removeTodo } from "../../redux/todo/todoActions";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import s from "./ToDoList.module.css";
 
-class ToDoList extends Component {
-  render() {
-    const { items, removeToDo } = this.props;
+const ToDoList = () => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos);
+  const filter = useSelector((state) => state.filter);
+  const handleRemoveToDo = (id) => dispatch(removeTodo(id));
 
-    return items.length > 0 ? (
-      <ul className={s.toDoList}>
-        {items.map(({ id, ...item }) => (
-          <ToDoItem key={id} {...item} id={id} cbRemoveItem={removeToDo} />
-        ))}
-      </ul>
-    ) : null;
-  }
-}
-ToDoList.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  removeToDo: PropTypes.func.isRequired,
+  const getItems = () => {
+    console.log('todos :>> ', todos);
+    if (filter === "all") return todos;
+    return todos.filter((todo) => todo.priority === filter);
+  };
+
+  const items = getItems();
+
+  return items.length > 0 ? (
+    <ul className={s.toDoList}>
+      {items.map(({ id, ...item }) => (
+        <ToDoItem key={id} {...item} id={id} cbRemoveItem={handleRemoveToDo} />
+      ))}
+    </ul>
+  ) : null;
 };
 
 export default ToDoList;

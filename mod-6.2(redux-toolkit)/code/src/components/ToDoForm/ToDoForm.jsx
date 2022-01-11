@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { v4 } from "uuid";
+import { useDispatch } from "react-redux";
 import s from "./ToDoForm.module.css";
+import { addToDo } from "../../redux/todo/todoActions";
 
 const ToDoForm = () => {
+  const dispatch = useDispatch();
   const [descr, setDescr] = useState("");
   const [priority, setPriority] = useState("low");
 
@@ -22,8 +24,8 @@ const ToDoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const todo = { descr, priority, id: v4() };
-    console.log("add todo - ", todo);
+    const todo = { descr, priority };
+    dispatch(addToDo(todo));
   };
 
   return (
