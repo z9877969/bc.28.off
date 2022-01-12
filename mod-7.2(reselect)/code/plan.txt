@@ -1,0 +1,4 @@
+1.middlewares
+2.thunk & addTodoId
+3.operations - request/success/error
+4.athyncThunk & slice -> extrareducers
