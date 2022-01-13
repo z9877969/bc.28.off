@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./ToDoForm.module.css";
-import { addTodo } from "../../redux/todo/todoOperations";
+import { addTodo, editTodo } from "../../redux/todo/todoOperations";
+import userReducer from "../../redux/user/userReducer";
+import {
+  getUserAge,
+  getUserName,
+  getUserZipCode,
+} from "../../redux/user/userSelectors";
+import { getEditedTodo } from "../../redux/todo/todosSelectors.js";
+import { useEffect } from "react";
 
 const ToDoForm = () => {
   const dispatch = useDispatch();
+  const userName = useSelector(getUserName);
+  const userAge = useSelector(getUserAge);
+  const userZipCode = useSelector(getUserZipCode);
+  const isLoading = useSelector((state) => state.todos.isLoading);
+  const editedTodo = useSelector(getEditedTodo);
   const [descr, setDescr] = useState("");
   const [priority, setPriority] = useState("low");
-  const isLoading = useSelector((state) => state.todos.isLoading);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,11 +38,29 @@ const ToDoForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const todo = { descr, priority };
-    dispatch(addTodo(todo));
+    !editedTodo
+      ? dispatch(addTodo(todo))
+      : dispatch(editTodo({ todo, id: editedTodo.id }));
   };
+
+  useEffect(() => {
+    if (editedTodo) {
+      setDescr(editedTodo.descr);
+      setPriority(editedTodo.priority);
+    }
+    if(!editedTodo){
+      setDescr("");
+      setPriority("low");
+    }
+  }, [editedTodo]);
+
+  // const 
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
+      <h1>Todos - {userName}</h1>
+      <p>Age - {userAge}</p>
+      <p>Zip code - {userZipCode}</p>
       <label className={s.label}>
         <span> Description </span>
         <input

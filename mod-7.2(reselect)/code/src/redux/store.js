@@ -3,6 +3,8 @@ import counterReducer from "./counter/counterReducer";
 import stepReducer from "./step/stepSlice";
 import todos from "./todo/todoReducer";
 import filter from "./filter/filterReducer";
+import userReducer from "./user/userReducer";
+import lang from './lang/langSlice';
 
 const middlewareTransformTodosObj = (store) => (next) => (action) => {
   if (action.type === "getTodosSuccess") {
@@ -16,10 +18,12 @@ const middlewareTransformTodosObj = (store) => (next) => (action) => {
 };
 
 const rootReducer = combineReducers({
+  user: userReducer,
   counter: counterReducer,
   step: stepReducer,
   todos,
   filter,
+  lang
 });
 
 const store = configureStore({

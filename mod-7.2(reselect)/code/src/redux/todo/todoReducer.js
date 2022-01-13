@@ -7,14 +7,20 @@ import {
   getTodosRequest,
   getTodosSuccess,
 } from "./todoActions";
-import { removeTodo } from "./todoOperations";
+import { removeTodo, editTodo } from "./todoOperations";
 
 const todoSlice = createSlice({
   name: "todos",
   initialState: {
     items: [],
+    editedTodo: null,
     isLoading: false,
     error: null,
+  },
+  reducers: {
+    openEditedTodo(state, { payload }) {
+      state.editedTodo = payload;
+    },
   },
   extraReducers: {
     [addTodoError]: (state, { payload }) => ({
@@ -62,7 +68,25 @@ const todoSlice = createSlice({
       error: payload,
       isLoading: false,
     }),
+    [editTodo.pending]: (state, { payload }) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [editTodo.fulfilled]: (state, { payload }) => ({
+      ...state,
+      isLoading: false,
+      editedTodo: null,
+      items: state.items.map((todo) =>
+        todo.id !== payload.id ? todo : payload
+      ),
+    }),
+    [editTodo.rejected]: (state, { payload }) => ({
+      ...state,
+      error: payload,
+      isLoading: false,
+    }),
   },
 });
 
+export const { openEditedTodo } = todoSlice.actions;
 export default todoSlice.reducer;

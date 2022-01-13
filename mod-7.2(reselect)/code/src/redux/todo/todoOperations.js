@@ -1,6 +1,7 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addTodoApi,
+  editTodoApi,
   getTodosApi,
   removeTodoApi,
 } from "../../utils/firebaseApi";
@@ -29,13 +30,26 @@ export const getTodos = () => (dispatch) => {
     .catch((err) => dispatch(getTodosError(err)));
 };
 
-export const removeTodo = createAsyncThunk("todo", async (id, thunkApi) => {
+export const removeTodo = createAsyncThunk(
+  "removeTodo",
+  async (id, thunkApi) => {
     try {
-        const respId = await removeTodoApi(id)
-        return respId
-    } catch(err){
-        return thunkApi.rejectWithValue(err)
+      const respId = await removeTodoApi(id);
+      return respId;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
     }
-})
+  }
+);
 
-
+export const editTodo = createAsyncThunk(
+  "editTodo",
+  async ({ id, todo }, { rejectWithValue }) => {
+    try {
+      const editedTodo = await editTodoApi({ todo, id });
+      return {...editedTodo, id};
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);

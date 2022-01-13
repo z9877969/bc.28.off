@@ -24,3 +24,7 @@
   cursor: pointer;
   margin-top: auto;
 }
+
+.toDoBtn:last-child{
+  margin-top: 10px;
+}

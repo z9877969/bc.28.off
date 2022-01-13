@@ -38,3 +38,12 @@ export const removeTodoApi = async (id) => {
     throw err.message;
   }
 };
+
+export const editTodoApi = async ({ todo, id }) => {
+  try {
+    const { data } = await axios.put(path.TODOS + "/" + id + ".json", todo);
+    return data;
+  } catch (err) {
+    throw err.message;
+  }
+};
