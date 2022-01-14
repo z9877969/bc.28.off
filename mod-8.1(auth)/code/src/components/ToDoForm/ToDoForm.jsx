@@ -1,21 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./ToDoForm.module.css";
 import { addTodo, editTodo } from "../../redux/todo/todoOperations";
-import userReducer from "../../redux/user/userReducer";
-import {
-  getUserAge,
-  getUserName,
-  getUserZipCode,
-} from "../../redux/user/userSelectors";
 import { getEditedTodo } from "../../redux/todo/todosSelectors.js";
-import { useEffect } from "react";
 
 const ToDoForm = () => {
   const dispatch = useDispatch();
-  const userName = useSelector(getUserName);
-  const userAge = useSelector(getUserAge);
-  const userZipCode = useSelector(getUserZipCode);
   const isLoading = useSelector((state) => state.todos.isLoading);
   const editedTodo = useSelector(getEditedTodo);
   const [descr, setDescr] = useState("");
@@ -58,9 +48,6 @@ const ToDoForm = () => {
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <h1>Todos - {userName}</h1>
-      <p>Age - {userAge}</p>
-      <p>Zip code - {userZipCode}</p>
       <label className={s.label}>
         <span> Description </span>
         <input

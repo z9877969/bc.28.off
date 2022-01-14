@@ -1,3 +1,5 @@
-1.selctors
-2.reselect
-3.edit todo
+1.token(алгоритм из конспекта) + JWT
+2.swager VS firebase_docs
+4.auth_api - (register, login)
+5.authPage+authForm
+6.authOperations->authSlice

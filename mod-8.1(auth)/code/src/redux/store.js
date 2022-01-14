@@ -1,24 +1,39 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { formatTodosObj } from "./_middlewares/formatTodosObj";
 import counterReducer from "./counter/counterReducer";
 import stepReducer from "./step/stepSlice";
 import todos from "./todo/todoReducer";
 import filter from "./filter/filterReducer";
-import userReducer from "./user/userReducer";
-import lang from './lang/langSlice';
+import auth from "./auth/authSlice";
+import lang from "./lang/langSlice";
 
-const middlewareTransformTodosObj = (store) => (next) => (action) => {
-  if (action.type === "getTodosSuccess") {
-    const payload = Object.entries(action.payload).map(([id, data]) => ({
-      ...data,
-      id,
-    }));
-    action.payload = payload;
-  }
-  next(action);
+const authPersistConfig = {
+  key: "token",
+  version: 1,
+  storage,
+  whitelist: ["token"],
+};
+
+const persistConfig = {
+  key: "lang",
+  version: 1,
+  storage,
+  whitelist: ["lang"],
 };
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  auth: persistReducer(authPersistConfig, auth),
   counter: counterReducer,
   step: stepReducer,
   todos,
@@ -26,11 +41,19 @@ const rootReducer = combineReducers({
   lang
 });
 
+const middleware = (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }).concat(formatTodosObj);
+
 const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(middlewareTransformTodosObj),
+  reducer: persistReducer(persistConfig, rootReducer),
+  middleware,
   devTools: process.env.NODE_ENV !== "production",
 });
+
+export const persistor = persistStore(store);
 
 export default store;

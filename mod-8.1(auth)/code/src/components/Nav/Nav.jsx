@@ -1,45 +1,26 @@
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-
-const btnStyle = {
-  display: "inline-block",
-  padding: "10px 20px",
-  backgroundColor: "green",
-  textDecoration: "none",
-  cursor: "pointer",
-  fontSize: "24px",
-  borderRadius: "30%",
-};
+import { getIsAuth } from "../../redux/auth/authSelectors";
+import { logOut } from "../../redux/auth/authSlice";
+import AuthNav from "../_nav/AuthNav/AuthNav";
+import UserNav from "../_nav/UserNav/UserNav";
 
 const Nav = () => {
+  const dispatch = useDispatch();
+  const isAuth = useSelector(getIsAuth);
+
   return (
-    <header style={{position: "fixed", width: "100%"}}>
-      <nav className="nav">
-        <NavLink
-          className="link"
-          exact
-          to="/"
-          style={btnStyle}
-          activeStyle={{ color: "red" }}
+    <header style={{ position: "fixed", width: "100%" }}>
+      <nav className="nav">{isAuth ? <UserNav /> : <AuthNav />}</nav>
+      {isAuth && (
+        <button
+          type="button"
+          style={{ position: "absolute", top: "0", right: "0" }}
+          onClick={() => dispatch(logOut())}
         >
-          Home
-        </NavLink>
-        <NavLink
-          className="link"
-          to="/todo"
-          style={btnStyle}
-          activeStyle={{ color: "red" }}
-        >
-          ToDo
-        </NavLink>
-        <NavLink
-          className="link"
-          to="/counter"
-          style={btnStyle}
-          activeStyle={{ color: "red" }}
-        >
-          Counter
-        </NavLink>
-      </nav>
+          LogOut
+        </button>
+      )}
     </header>
   );
 };

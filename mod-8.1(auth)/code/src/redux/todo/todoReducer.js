@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logOut } from "../auth/authSlice";
 import {
   addTodoError,
   addTodoRequest,
@@ -9,14 +10,16 @@ import {
 } from "./todoActions";
 import { removeTodo, editTodo } from "./todoOperations";
 
+const initialState = {
+  items: [],
+  editedTodo: null,
+  isLoading: false,
+  error: null,
+};
+
 const todoSlice = createSlice({
   name: "todos",
-  initialState: {
-    items: [],
-    editedTodo: null,
-    isLoading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
     openEditedTodo(state, { payload }) {
       state.editedTodo = payload;
@@ -85,6 +88,7 @@ const todoSlice = createSlice({
       error: payload,
       isLoading: false,
     }),
+    [logOut]: () => initialState,
   },
 });
 

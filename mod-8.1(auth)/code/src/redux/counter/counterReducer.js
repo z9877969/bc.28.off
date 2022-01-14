@@ -1,4 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { logOut } from "../auth/authSlice";
 import { increment, decrement, reset } from "./counterActions";
 
 // const counterReducer = (state = 200, { type, payload }) => {
@@ -13,10 +14,14 @@ import { increment, decrement, reset } from "./counterActions";
 //       return state;
 //   }
 // };
-const counterReducer = createReducer(200, {
+
+const iS = 200;
+
+const counterReducer = createReducer(iS, {
   [decrement]: (state, { payload }) => state - payload,
   [increment]: (state, { payload }) => state + payload,
   [reset]: () => 0,
+  [logOut]: () => iS,
 });
 
 export default counterReducer;

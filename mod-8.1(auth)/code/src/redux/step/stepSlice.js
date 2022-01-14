@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logOut } from "../auth/authSlice";
+
+const iS = {
+  incr: 5,
+  decr: 10,
+};
 
 const stepSlice = createSlice({
   name: "step",
-  initialState: {
-    incr: 5,
-    decr: 10,
-  },
+  initialState: iS,
   reducers: {
     changeIncr(state, { payload }) {
       state.incr = payload;
@@ -14,6 +17,9 @@ const stepSlice = createSlice({
       state.decr = payload;
     },
   },
+  extraReducers: {
+    [logOut]: () => iS
+  }
 });
 
 export const { changeIncr, changeDecr } = stepSlice.actions;

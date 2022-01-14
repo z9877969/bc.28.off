@@ -89,3 +89,27 @@ button:active {
   margin: 0 auto;
   background-color: green;
 }
+
+/* AuthForm-START*/
+.form {
+  display: block;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input {
+  display: block;
+  font-size: 20px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.input:not(:last-child){
+  margin-bottom: 10px;
+}
+/* AuthForm-END*/
