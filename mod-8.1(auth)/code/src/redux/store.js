@@ -22,7 +22,7 @@ const authPersistConfig = {
   key: "token",
   version: 1,
   storage,
-  whitelist: ["token"],
+  whitelist: ["token", "refreshToken"],
 };
 
 const persistConfig = {
@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
   step: stepReducer,
   todos,
   filter,
-  lang
+  lang,
 });
 
 const middleware = (getDefaultMiddleware) =>

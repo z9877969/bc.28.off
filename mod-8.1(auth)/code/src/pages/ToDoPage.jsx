@@ -7,16 +7,18 @@ import { PageWrapper } from "../components/_styled/PageWrapper";
 import { getTodos } from "../redux/todo/todoOperations";
 import { options, changeLang } from "../redux/lang/langSlice";
 import { getLang } from "../redux/lang/langSelectors";
+import { getUserId } from "../redux/auth/authSelectors";
 
 const ToDoPage = () => {
   const dispatch = useDispatch();
   const isNotTodos = !useSelector((state) => state.todos.items).length;
+  const userId = useSelector(getUserId);
   const lang = useSelector(getLang);
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    isNotTodos && dispatch(getTodos());
-  }, []);
+    isNotTodos && userId && dispatch(getTodos());
+  }, [userId]);
 
   return (
     <>
@@ -30,7 +32,9 @@ const ToDoPage = () => {
           onChange={(e) => dispatch(changeLang(e.target.value))}
         >
           {options.map(({ title, value }) => (
-            <option value={value}>{title}</option>
+            <option key={value} value={value}>
+              {title}
+            </option>
           ))}
         </select>
         <ToDoForm />

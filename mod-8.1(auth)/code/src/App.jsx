@@ -3,6 +3,8 @@ import { Suspense, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
+import PrivateRoute from "./components/_routes/PrivateRoute";
+import PublicRoute from "./components/_routes/PublicRoute";
 import AuthPage from "./pages/AuthPage";
 import { getCurUser } from "./redux/auth/authOperations";
 import { getIsAuth, getIsToken } from "./redux/auth/authSelectors";
@@ -31,7 +33,7 @@ const App = () => {
     <div className="App">
       <Nav />
       <Suspense fallback={<h1>Loading...</h1>}>
-        {isAuth ? (
+        {/* {isAuth ? (
           <Switch>
             <Route path="/" exact>
               <HomePage title={title} />
@@ -45,7 +47,20 @@ const App = () => {
             <Route path="/auth/:authType" component={AuthPage} />
             <Redirect to="/auth/login" />
           </Switch>
-        )}
+        )} */}
+        <Switch>
+          <PrivateRoute path={"/counter"} component={CounterPage} />
+          <PrivateRoute path={"/todo"} component={ToDoPage} />
+          
+          <PublicRoute
+            component={AuthPage}
+            path="/auth/:authType"
+            restricted={true}
+          />
+          <PublicRoute path={"/"} exact={true} restricted={false}>
+            <HomePage title={title} />
+          </PublicRoute>
+        </Switch>
       </Suspense>
     </div>
   );

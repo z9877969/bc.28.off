@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userRegister, userLogin, getCurUser } from "./authOperations";
+import { userRegister, userLogin, getCurUser, refreshTokenRequest, refreshTokenSuccess, refreshToken, refreshTokenError } from "./authOperations";
 
 const initialState = {
   user: {
@@ -7,6 +7,7 @@ const initialState = {
     userId: null,
   },
   token: null,
+  refreshToken: null,
   isLoading: false,
   error: null,
 };
@@ -27,6 +28,7 @@ const authSlice = createSlice({
     [userRegister.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.token = payload.idToken;
+      state.refreshToken = payload.refreshToken;
       state.user = {
         email: payload.email,
         userId: payload.localId,
@@ -43,6 +45,7 @@ const authSlice = createSlice({
     [userLogin.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.token = payload.idToken;
+      state.refreshToken = payload.refreshToken;
       state.user = {
         email: payload.email,
         userId: payload.localId,
@@ -67,6 +70,20 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = payload;
     },
+    [refreshTokenRequest]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [refreshTokenSuccess]: (state, { payload }) => {
+      state.isLoading = false;
+      state.token = payload.token;
+      state.refreshToken = payload.refreshToken
+    },
+    [refreshTokenError]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    } 
+
   },
 });
 

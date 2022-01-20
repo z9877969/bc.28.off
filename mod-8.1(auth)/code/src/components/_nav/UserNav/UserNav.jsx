@@ -15,15 +15,6 @@ const UserNav = () => {
     <>
       <NavLink
         className="link"
-        exact
-        to="/"
-        style={btnStyle}
-        activeStyle={{ color: "red" }}
-      >
-        Home
-      </NavLink>
-      <NavLink
-        className="link"
         to="/todo"
         style={btnStyle}
         activeStyle={{ color: "red" }}

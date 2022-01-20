@@ -14,41 +14,59 @@ import {
   getTodosSuccess,
 } from "./todoActions";
 
-export const addTodo = (todo) => (dispatch) => {
+export const addTodo = (todo) => (dispatch, getState) => {
   dispatch(addTodoRequest());
+  const {
+    token,
+    user: { userId },
+  } = getState().auth;
 
-  addTodoApi(todo)
+  addTodoApi({ todo, userId, token })
     .then((todo) => dispatch(addTodoSuccess(todo)))
     .catch((err) => dispatch(addTodoError(err)));
 };
 
-export const getTodos = () => (dispatch) => {
+export const getTodos = () => (dispatch, getState) => {
   dispatch(getTodosRequest());
 
-  getTodosApi()
+  const {
+    token,
+    user: { userId },
+  } = getState().auth;
+
+  getTodosApi(userId, token)
     .then((todos) => dispatch(getTodosSuccess(todos)))
     .catch((err) => dispatch(getTodosError(err)));
 };
 
 export const removeTodo = createAsyncThunk(
   "removeTodo",
-  async (id, thunkApi) => {
+  async (id, { getState, rejectWithValue }) => {
+    const {
+      token,
+      user: { userId },
+    } = getState().auth;
     try {
-      const respId = await removeTodoApi(id);
+      const respId = await removeTodoApi({ id, userId, token });
       return respId;
     } catch (err) {
-      return thunkApi.rejectWithValue(err);
+      return rejectWithValue(err);
     }
   }
 );
 
 export const editTodo = createAsyncThunk(
   "editTodo",
-  async ({ id, todo }, { rejectWithValue }) => {
+  async ({ id, todo }, { rejectWithValue, getState }) => {
+    const {
+      token,
+      user: { userId },
+    } = getState().auth;
     try {
-      const editedTodo = await editTodoApi({ todo, id });
-      return {...editedTodo, id};
+      const editedTodo = await editTodoApi({ todo, id, userId, token });
+      return { ...editedTodo, id };
     } catch (err) {
+      console.log('rejectWithValue(err) :>> ', rejectWithValue(err));
       return rejectWithValue(err);
     }
   }
