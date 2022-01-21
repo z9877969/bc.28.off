@@ -34,12 +34,8 @@ const defaults = {
     axios.defaults.params = params;
   },
   getError(error) {
-    console.log(
-      "JSON.parse(error.request.responseText) :>> ",
-      error.request.responseText
-      // JSON.parse(error.request)
-    );
-    return JSON.parse(error.request.responseText).error;
+    console.log("error.request?.response :>> ", error.request);
+    return JSON.parse(error.request?.response).error;
   },
 };
 
@@ -138,7 +134,6 @@ export const getCurUserApi = async (idToken) => {
     const { localId, email } = data.users[0];
     return { localId, email };
   } catch (err) {
-    console.log("defaults.getError(err) :>> ", defaults.getError(err));
     throw defaults.getError(err);
   }
 };
@@ -147,14 +142,13 @@ export const refreshTokenApi = async (refreshToken) => {
   defaults.setBaseUrl(baseUrl.REFRESH);
   defaults.setParams({ key: API_KEY });
   try {
-    const { data } = axios.post(path.REFRESH, {
+    const { data } = await axios.post(path.REFRESH, {
       grant_type: "refresh_token",
       refresh_token: refreshToken,
     });
-    const { id_token, refresh_token } = data;
-    return { token: id_token, refreshToken: refresh_token };
+    const { access_token, refresh_token } = data;
+    return { token: access_token, refreshToken: refresh_token };
   } catch (err) {
-console.log('err_refreshOperation :>> ', err);
     throw defaults.getError(err);
   }
 };

@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   userRegisterApi,
   userLoginApi,
@@ -39,47 +39,30 @@ export const getCurUser = createAsyncThunk(
       const userData = await getCurUserApi(token);
       return userData;
     } catch (error) {
-      console.log("rejectWithValue(error) :>> ", rejectWithValue(error));
-      dispatch(
-        errorHandler({
-          error,
-          cbOperation: getCurUser,
-        })
-      );
+        dispatch(
+          errorHandler({
+            error,
+            cbOperation: getCurUser,
+          })
+        );
       return rejectWithValue(error);
     }
   }
 );
 
-// export const refreshToken = createAsyncThunk(
-//   "refreshToken",
-//   async (cbOperation, { getState, rejectWithValue,  }) => {
-//     const { refreshToken } = getState().auth;
-//     try {
-//       const { data } = refreshTokenApi(refreshToken);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error)
-//     }
-//   }
-// );
+export const refreshToken = createAsyncThunk(
+  "refreshToken",
+  async (cbOperation, { getState, rejectWithValue, dispatch }) => {
+    const { refreshToken } = getState().auth;
+    try {
+      const data = await refreshTokenApi(refreshToken);
+      setTimeout(() => {
+        dispatch(cbOperation());
+      }, 0);
 
-export const refreshTokenRequest = createAction("auth/refresh/pending");
-export const refreshTokenSuccess = createAction("auth/refresh/fulfilled");
-export const refreshTokenError = createAction("auth/refresh/rejected");
-
-export const refreshToken = (cbOperation) => async (dispatch, getState) => {
-  dispatch(refreshTokenRequest());
-  const { refreshToken } = getState().auth;
-  try {
-    const data = await refreshTokenApi(refreshToken);
-
-    console.log("REFRESH", data);
-    dispatch(refreshTokenSuccess(data));
-    dispatch(cbOperation());
-  } catch (error) {
-    dispatch(refreshTokenError(error));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
-};
-
-// dispatch(getCurUser("data"))
+);

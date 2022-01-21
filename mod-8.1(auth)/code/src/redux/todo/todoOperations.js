@@ -5,6 +5,7 @@ import {
   getTodosApi,
   removeTodoApi,
 } from "../../utils/firebaseApi";
+import { errorHandler } from "../error/errorHandler";
 import {
   addTodoError,
   addTodoRequest,
@@ -41,7 +42,7 @@ export const getTodos = () => (dispatch, getState) => {
 
 export const removeTodo = createAsyncThunk(
   "removeTodo",
-  async (id, { getState, rejectWithValue }) => {
+  async (id, { getState, rejectWithValue, dispatch }) => {
     const {
       token,
       user: { userId },
@@ -49,15 +50,21 @@ export const removeTodo = createAsyncThunk(
     try {
       const respId = await removeTodoApi({ id, userId, token });
       return respId;
-    } catch (err) {
-      return rejectWithValue(err);
+    } catch (error) {
+      dispatch(
+        errorHandler({
+          error,
+          cbOperation: () => removeTodo(id),
+        })
+      );
+      return rejectWithValue(error);
     }
   }
 );
 
 export const editTodo = createAsyncThunk(
   "editTodo",
-  async ({ id, todo }, { rejectWithValue, getState }) => {
+  async ({ id, todo }, { rejectWithValue, getState, dispatch }) => {
     const {
       token,
       user: { userId },
@@ -65,9 +72,14 @@ export const editTodo = createAsyncThunk(
     try {
       const editedTodo = await editTodoApi({ todo, id, userId, token });
       return { ...editedTodo, id };
-    } catch (err) {
-      console.log('rejectWithValue(err) :>> ', rejectWithValue(err));
-      return rejectWithValue(err);
+    } catch (error) {
+      dispatch(
+        errorHandler({
+          error,
+          cbOperation: () => editTodo({ id, todo }),
+        })
+      );
+      return rejectWithValue(error);
     }
   }
 );
